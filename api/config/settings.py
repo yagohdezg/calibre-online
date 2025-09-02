@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-9w($qtngh86z)bob4lqba1=p%fcle7l45-yq-6-tx5os9!p#0x'
+SECRET_KEY = 'django-insecure-7$6h)$#b1%l@l*v$qs0ppq_20#z=gt#%aq2*&1p1glv!tgpfsu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,11 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     'corsheaders',
-    'drf_spectacular',
     'rest_framework',
     'rest_framework_simplejwt',
+    'drf_spectacular',
     'users',
 ]
 
@@ -129,23 +129,16 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+# Misc Configs
 AUTH_USER_MODEL = "users.User"
 
-# CORS settings
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-]
-
-# Simple JWT settings
-
-SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(seconds=30),
-    "REFRESH_TOKEN_LIFETIME": timedelta(minutes=5),
-    "ROTATE_REFRESH_TOKENS": True,
+# DRF Spectacular Settings
+SPECTACULAR_SETTINGS = {
+    "TITLE": "My API",
+    "swagger": "2.0"
 }
 
-# Rest Framework settings
+# Rest Framework Settings
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -153,7 +146,14 @@ REST_FRAMEWORK = {
     ]
 }
 
-SPECTACULAR_SETTINGS = {
-    "TITLE": "My API",
-    "swagger": "2.0"
+# Simple JWT Settings
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(seconds=30),
+    "REFRESH_TOKEN_LIFETIME": timedelta(minutes=5),
+    "ROTATE_REFRESH_TOKENS": True,
 }
+
+# CORS Settings
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]

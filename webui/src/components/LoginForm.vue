@@ -1,50 +1,30 @@
 <script setup>
-    import { ref } from "vue";
-    import { useAuth } from "@/stores/auth";
+    import { ref } from 'vue';
+    import { useAuth }  from '@/stores/auth';
 
     const auth = useAuth();
-    const username = ref("");
-    const password = ref("");
-
-    function formatError(err) {
-        if (typeof err === "string") return err;
-        if (err?.detail) return err.detail;
-        // DRF serializer errors object -> show first message
-        const firstKey = err && Object.keys(err)[0];
-        if (firstKey && Array.isArray(err[firstKey])) return err[firstKey][0];
-        try { 
-            return JSON.stringify(err);
-        } catch {
-            return "Login failed";
-        }
-    }
+    const username = ref('');
+    const password = ref('');
 
     async function onSubmit() {
         await auth.login(username.value, password.value);
     }
+
 </script>
 
 <template>
     <form class="login" @submit.prevent="onSubmit">
         <h2>Login</h2>
         <label>
-            Username
-            <input v-model.trim="username" autocomplete="username" required />
+            Username:
+            <input type="text" name="username" v-model="username" required/>
         </label>
-
         <label>
-            Password
-            <input v-model="password" type="password" autocomplete="current-password" required />
+            Password:
+            <input type="password" name="password" v-model="password" required/>
         </label>
-
-        <button :disabled="auth.state.loading">
-            {{ auth.state.loading ? "Logging in..." : "Login" }}
-        </button>
-
-        <p v-if="auth.state.error" class="error">
-            {{ formatError(auth.state.error) }}
-        </p>
-    </form>
+        <button type="submit">Login</button>
+    </form>>
 </template>
 
 <style scoped>
@@ -64,12 +44,12 @@
         border-radius: 8px;
     }
     button {
-        padding: 0.6rem 0.8rem;
+        padding: 0.5rem;
         border: none;
         border-radius: 8px;
+        background-color: #42b983;
+        color: white;
+        font-weight: bold;
         cursor: pointer;
-    }
-    .error {
-        color: #b00020;
     }
 </style>
