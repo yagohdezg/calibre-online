@@ -1,5 +1,6 @@
 <script setup>
     import LoginForm from '@/components/LoginForm.vue'
+    import MainWindow from '@/components/MainWindow.vue'
     import { useAuth } from '@/stores/auth'
 
     const auth = useAuth()
@@ -8,13 +9,10 @@
 <template>
     <main>
         <LoginForm v-if="!auth.isAuthenticated.value" />
-        <section v-else>
-            <h1>Welcome!</h1>
-            <p>You are logged in.</p>
-            <button @click="auth.logout">Logout</button>
-        </section>
+        <MainWindow v-else />
     </main>
 </template>
 
 <style scoped>
+    main { min-height: 100vh; }
 </style>
